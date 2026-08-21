@@ -1,0 +1,15 @@
+*** Begin Patch
+*** Update File: processor.py
+@@
+ def normalize_folio(value:str)->str:
+     m=FOLIO_RE.search(value or '')
+-    return f'{m.group(1)}-{m.group(2)}' if m else 'REVIEW'
++    return f'{m.group(1)}{m.group(2)}' if m else 'REVIEW'
+*** Update File: test_processor.py
+@@
+-def test_folio(): assert normalize_folio('2457 015')=='2457-015'
++def test_folio(): assert normalize_folio('2457 015')=='2457015'
+@@
+-def test_name(): assert make_filename('JAN-07-26','2457 015')=='JAN-07-26_2457-015.pdf'
++def test_name(): assert make_filename('JAN-07-26','2457 015')=='JAN-07-26_2457015.pdf'
+*** End Patch
